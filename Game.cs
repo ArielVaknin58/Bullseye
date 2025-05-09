@@ -12,8 +12,8 @@ namespace Bullseye
         private int m_MaxGuesses { get; set; } = 10;
         private int m_GuessCounter { get; set; } = 0;
 
-
-        public char[] GuessString()
+       
+        public char[] GenerateString()
         {
             Random random = new Random();
             int[] PreviousGuesses = new int[m_StringLength];
@@ -32,6 +32,27 @@ namespace Bullseye
 
             return m_CorrectGuess;
         }
+
+        public List<char> GuessCurrentString(char[] i_guess)
+        {
+            List<char> result = new List<char>();
+            for(int i = 0 ;i < i_guess.Length; i++)
+            {
+                if (i_guess[i].Equals(m_CorrectGuess[i]))
+                {
+                    result.Add('V');
+                }             
+                else if(m_CorrectGuess.Contains(i_guess[i]))
+                {
+                    result.Add('X');
+                }
+            }
+
+            result.Sort();
+            return result;
+        }
+
+
 
     }
 }
