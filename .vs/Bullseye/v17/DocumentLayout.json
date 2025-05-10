@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Bullseye.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Bullseye.csproj|solutionrelative:game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Bullseye.csproj|C:\\Users\\Ariel\\source\\repos\\Bullseye\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Bullseye.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Bullseye.csproj|C:\\Users\\Ariel\\source\\repos\\Bullseye\\consolehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Bullseye.csproj|solutionrelative:consolehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Bullseye.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Bullseye.csproj|solutionrelative:game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,7 +34,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "ConsoleHandler.cs",
               "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\ConsoleHandler.cs",
               "RelativeDocumentMoniker": "ConsoleHandler.cs",
@@ -47,20 +47,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Game.cs",
               "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\Game.cs",
               "RelativeDocumentMoniker": "Game.cs",
               "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\Game.cs",
               "RelativeToolTip": "Game.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG4AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-09T13:06:08.415Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",

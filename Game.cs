@@ -8,14 +8,12 @@ namespace Bullseye
 {
     internal class Game
     {
-        private const int m_StringLength = 4;
-        private char[] m_CorrectGuess { get; set; } = new char[m_StringLength];
+        private const int k_StringLength = 4;
+        private char[] m_CorrectGuess { get; set; } = new char[k_StringLength];
         private int m_MaxGuesses { get; set; } = 10;
-
         private int m_GuessNumber { get; set; } = 1;
         private List<string> m_PreviousGuesses { get; set; }
         private List<string> m_PreviousFeedbacks { get; set; }
-
         private ConsoleHandler m_Handler { get; set; } = new ConsoleHandler();
         public void Run()
         {
@@ -23,16 +21,17 @@ namespace Bullseye
             {
                 m_Handler.PrintLine("~~Hello ! Welcome to Bullseye.~~");
                 m_Handler.PrintLine("Please choose the number of max guesses (4-10):");
-                string GuessNumInput = m_Handler.ReadLine();
-                int numericGuess;
+
+                string userInput = m_Handler.ReadLine();
+                int parsedNumber;
+
                 while (true)
                 {
-                    if (!int.TryParse(GuessNumInput, out numericGuess))
+                    if (!int.TryParse(userInput, out parsedNumber))
                     {
                         m_Handler.PrintLine("Please enter a legal input - a number between 4 and 10 !");
-
                     }
-                    else if (numericGuess > 10 || numericGuess < 4)
+                    else if (parsedNumber < 4 || parsedNumber > 10)
                     {
                         m_Handler.PrintLine("The given number is not in range, must be between 4-10 !");
                     }
@@ -40,85 +39,89 @@ namespace Bullseye
                     {
                         break;
                     }
-                    GuessNumInput = m_Handler.ReadLine();
-                }
-                this.m_MaxGuesses = numericGuess;
-                string TrueString = new string(this.GenerateString());
-                m_Handler.PrintLine(TrueString);
 
+                    userInput = m_Handler.ReadLine();
+                }
+
+                m_MaxGuesses = parsedNumber;
+                GenerateString();
                 m_PreviousGuesses = new List<string>();
                 m_PreviousFeedbacks = new List<string>();
 
-                bool IfGuessedCorrect = false;
-                bool Quits = false;
-                for (m_GuessNumber = 1 ; m_GuessNumber <= this.m_MaxGuesses ; m_GuessNumber++)
+                bool v_WasGuessedCorrectly = false;
+                bool v_UserQuits = false;
+
+                for (m_GuessNumber = 1; m_GuessNumber <= m_MaxGuesses; m_GuessNumber++)
                 {
-                    m_Handler.PrintLine($"Please enter a {this.getStringLength()}-character long string of letters between A-H :");
-                    string myGuess = m_Handler.ReadLine();
-                    if (this.toQuit(myGuess))
+                    m_Handler.PrintLine($"Please enter a {getStringLength()}-character long string of letters between A-H :");
+                    string guessInput = m_Handler.ReadLine();
+
+                    if (toQuit(guessInput.ToUpper()))
                     {
-                        Quits = true;
+                        v_UserQuits = true;
                         break;
                     }
-                    while (!this.CheckIfValidString(myGuess.ToCharArray()))
+
+                    while (!IsValidGuess(guessInput.ToCharArray()))
                     {
-                        m_Handler.PrintLine($"Please enter a valid {this.getStringLength()}-character long string of letters between A-H :");
-                        myGuess = m_Handler.ReadLine();
-                        if (this.toQuit(myGuess))
+                        m_Handler.PrintLine($"Please enter a valid {getStringLength()}-character long string of letters between A-H :");
+                        guessInput = m_Handler.ReadLine();
+                        if (toQuit(guessInput))
                         {
-                            Quits = true;
+                            v_UserQuits = true;
                             break;
                         }
                     }
-                    if (Quits)
+
+                    if (v_UserQuits)//If wants to quit during the previous while loop and not the if before- another break is needed to exit the main loop
                     {
                         break;
                     }
-                    m_Handler.PrintLine($"Your guess is : {myGuess}");
-                    StringBuilder GuessBuilder = new StringBuilder();
-                    foreach(char c in myGuess.ToCharArray())
+
+                    StringBuilder guessBuilder = new StringBuilder();
+                    foreach(char c in guessInput.ToCharArray())
                     {
-                        GuessBuilder.Append(c);
-                        GuessBuilder.Append(' ');
+                        guessBuilder.Append(c);
+                        guessBuilder.Append(' ');
                     }
-                    m_Handler.PrintLine($"Modified guess : {GuessBuilder.ToString()}");
-                    this.m_PreviousGuesses.Add(GuessBuilder.ToString());
-                    List<char> Feedback = this.GuessCurrentString(myGuess.ToCharArray());
-                    StringBuilder FeedbackBuilder = new StringBuilder();
-                    foreach (char c in Feedback)
+
+                    m_PreviousGuesses.Add(guessBuilder.ToString());
+
+                    List<char> feedback = EvaluateGuess(guessInput.ToCharArray());
+                    StringBuilder feedbackBuilder = new StringBuilder();
+                    foreach (char c in feedback)
                     {
-                        FeedbackBuilder.Append(c);
-                        FeedbackBuilder.Append(' ');
+                        feedbackBuilder.Append(c);
+                        feedbackBuilder.Append(' ');
                     }
-                    this.m_PreviousFeedbacks.Add(FeedbackBuilder.ToString());
-                    m_Handler.Print($"Feedback for the guess {myGuess} // ");
-                    foreach (char c in Feedback)
+
+                    m_PreviousFeedbacks.Add(feedbackBuilder.ToString());
+
+                    foreach (char c in feedback)
                     {
                         m_Handler.Print(c.ToString());
                     }
+
                     m_Handler.PrintLine();
-                    if (this.CheckIfBullseye(Feedback) || m_GuessNumber == m_MaxGuesses)
+
+                    PrintBoard(CheckIfBullseye(feedback) || m_GuessNumber == m_MaxGuesses);
+
+                    if (CheckIfBullseye(feedback))
                     {
-                        PrintBoard(true);
-                    }
-                    else
-                    {
-                        PrintBoard(false);
-                    }
-                    if (this.CheckIfBullseye(Feedback))
-                    {
-                        m_Handler.PrintLine("##Congratulations ! You correctly guessed the string !##");
-                        IfGuessedCorrect = true;
+                        m_Handler.PrintLine("\nCongratulations ! You correctly guessed the string !");
+                        v_WasGuessedCorrectly = true;
                         break;
                     }
+
                     m_Handler.PrintLine();
                 }
-                if (Quits)
+
+                if (v_UserQuits)
                 {
                     m_Handler.PrintLine("~Goodbye !");
                     break;
                 }
-                else if (!IfGuessedCorrect)
+                else if (!v_WasGuessedCorrectly)
                 {
                     m_Handler.PrintLine("No more guesses allowed. You lost.");
                 }
@@ -126,48 +129,56 @@ namespace Bullseye
                 {
                     m_Handler.PrintLine($"You guessed after {m_GuessNumber} steps!");
                 }
+
                 m_Handler.PrintLine("Would you like to start a new game ? <Y/N>");
-                string RetryInput = m_Handler.ReadLine();
-                while (!RetryInput.Equals("N") && !RetryInput.Equals("Y"))
+                string retryInput = m_Handler.ReadLine();
+
+                while (!retryInput.Equals("N") && !retryInput.Equals("Y"))
                 {
                     m_Handler.PrintLine("Invalid input. Please enter Y/N");
-                    RetryInput = m_Handler.ReadLine();
+                    retryInput = m_Handler.ReadLine();
                 }
-                if (RetryInput.Equals("N"))
+
+                if (retryInput.Equals("N"))
                 {
                     m_Handler.PrintLine("~Goodbye !");
                     break;
                 }
             }
+
         }
-        public int getStringLength() { return m_StringLength; }
+        public int getStringLength() 
+        { 
+            return k_StringLength; 
+        }
+
         public char[] GenerateString()
         {
             Random random = new Random();
-            int[] PreviousGuesses = new int[m_StringLength];
-            for (int i = 0; i < m_StringLength; i++)
+            int[] selectedLettersPool = new int[k_StringLength];
+            for (int i = 0; i < k_StringLength; i++)
             {
-                int Letter = random.Next(8);
-                while (PreviousGuesses.Contains(Letter))
+                int randomizedLetterAscii = random.Next(8);
+                while (selectedLettersPool.Contains(randomizedLetterAscii))
                 {
-                    Letter = random.Next(8);
+                    randomizedLetterAscii = random.Next(8);
                 }
-                PreviousGuesses[i] = Letter;
-                Letter += 65; //To get the ASCII value of a letter between A-J
-                m_CorrectGuess[i] = (char)Letter;
+
+                selectedLettersPool[i] = randomizedLetterAscii;
+                randomizedLetterAscii += 65; //To get the ASCII value of a letter between A-J
+                m_CorrectGuess[i] = (char)randomizedLetterAscii;
                 
             }
 
             return m_CorrectGuess;
         }
 
-        public List<char> GuessCurrentString(char[] i_guess)
+        public List<char> EvaluateGuess(char[] i_guess)
         {
             List<char> result = new List<char>();
             //Didn't use foreach loop because I compare elements in the same indices in the first condition
-            for(int i = 0 ;i < i_guess.Length; i++)
-            {
-                
+            for(int i = 0 ; i < i_guess.Length; i++)
+            {   
                 if (i_guess[i].Equals(m_CorrectGuess[i]))
                 {
                     result.Add('V');
@@ -181,7 +192,9 @@ namespace Bullseye
                     result.Add('Z');// Placeholder for the ' '. space has an ascii of 32 so it will be sorted to the front, but I need it in the back
                 }
             }
+
             result.Sort();// First V's, then X's and then 'Z's.
+
             for(int j = 0; j < i_guess.Length; j++)
             {
                 if (result[j].Equals('Z'))
@@ -189,6 +202,7 @@ namespace Bullseye
                     result[j] = ' ';//Place ' ' instead of the Z's in the end of the array
                 }
             }
+
             return result;
         }
 
@@ -202,13 +216,15 @@ namespace Bullseye
                     Vcounter++;
                 }
             }
-            return Vcounter == m_StringLength;
+
+            return Vcounter == k_StringLength;
         }
 
-        public bool CheckIfValidString(char[] i_StringInput)
+        public bool IsValidGuess(char[] i_StringInput)
         {
-            List<int> PreviousGuesses = new List<int>();
-            if (i_StringInput.Length != m_StringLength)
+            List<int> selectedLettersPool = new List<int>();
+
+            if (i_StringInput.Length != k_StringLength)
             {
                 return false;
             }
@@ -219,12 +235,15 @@ namespace Bullseye
                 {
                     return false;
                 }
-                if (PreviousGuesses.Contains(c))//If a letter appears more than once
+
+                if (selectedLettersPool.Contains(c))//If a letter appears more than once
                 {
                     return false;
                 }
-                PreviousGuesses.Add(c);
+
+                selectedLettersPool.Add(c);
             }
+
             return true;
         }
 
@@ -234,6 +253,7 @@ namespace Bullseye
             {
                 return true;
             }
+
             return false;
         }
 
@@ -243,6 +263,7 @@ namespace Bullseye
             Ex02.ConsoleUtils.Screen.Clear();
             m_Handler.PrintLine("| Pins:    | Result:  |");
             m_Handler.PrintLine("|=====================|");
+
             if (i_IsDone) 
             {
                 string correctGuess = new string(m_CorrectGuess);
@@ -258,12 +279,15 @@ namespace Bullseye
             {
                 m_Handler.PrintLine("| # # # #  |          |");
             }
+
             m_Handler.PrintLine("|=====================|");
-            for(int j = 1 ; j <= m_GuessNumber ; j++)
+
+            for(int j = 1; j <= m_GuessNumber; j++)
             {
                 m_Handler.PrintLine($"| {m_PreviousGuesses.ElementAt(j-1)} | {m_PreviousFeedbacks.ElementAt(j-1)} |");
                 m_Handler.PrintLine("|=====================|");
             }
+
             for (int i = m_GuessNumber; i < m_MaxGuesses; i++) 
             {
                 m_Handler.PrintLine("|          |          |");
