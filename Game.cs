@@ -13,8 +13,8 @@ namespace Bullseye
         private int m_MaxGuesses { get; set; } = 10;
 
         private int m_GuessNumber { get; set; } = 1;
-        private List<string> m_PreviousGuesses { get; } = new List<string>();
-        private List<string> m_PreviousFeedbacks { get; } = new List<string>();
+        private List<string> m_PreviousGuesses { get; set; }
+        private List<string> m_PreviousFeedbacks { get; set; }
 
         private ConsoleHandler m_Handler { get; set; } = new ConsoleHandler();
         public void Run()
@@ -45,6 +45,9 @@ namespace Bullseye
                 this.m_MaxGuesses = numericGuess;
                 string TrueString = new string(this.GenerateString());
                 m_Handler.PrintLine(TrueString);
+
+                m_PreviousGuesses = new List<string>();
+                m_PreviousFeedbacks = new List<string>();
 
                 bool IfGuessedCorrect = false;
                 bool Quits = false;
@@ -94,7 +97,14 @@ namespace Bullseye
                         m_Handler.Print(c.ToString());
                     }
                     m_Handler.PrintLine();
-                    PrintBoard();
+                    if (this.CheckIfBullseye(Feedback) || m_GuessNumber == m_MaxGuesses)
+                    {
+                        PrintBoard(true);
+                    }
+                    else
+                    {
+                        PrintBoard(false);
+                    }
                     if (this.CheckIfBullseye(Feedback))
                     {
                         m_Handler.PrintLine("##Congratulations ! You correctly guessed the string !##");
@@ -227,12 +237,27 @@ namespace Bullseye
             return false;
         }
 
-        public void PrintBoard()
+        public void PrintBoard(bool i_IsDone)
         {
+
             Ex02.ConsoleUtils.Screen.Clear();
             m_Handler.PrintLine("| Pins:    | Result:  |");
             m_Handler.PrintLine("|=====================|");
-            m_Handler.PrintLine("| # # # #  |          |");
+            if (i_IsDone) 
+            {
+                string correctGuess = new string(m_CorrectGuess);
+                StringBuilder CorrectGuessBuilder = new StringBuilder();
+                foreach (char c in m_CorrectGuess)
+                {
+                    CorrectGuessBuilder.Append(c);
+                    CorrectGuessBuilder.Append(' ');
+                }
+                m_Handler.PrintLine($"| {CorrectGuessBuilder.ToString()} |          |");
+            }
+            else
+            {
+                m_Handler.PrintLine("| # # # #  |          |");
+            }
             m_Handler.PrintLine("|=====================|");
             for(int j = 1 ; j <= m_GuessNumber ; j++)
             {

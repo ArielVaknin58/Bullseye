@@ -8,14 +8,14 @@ namespace Bullseye
 {
     internal class ConsoleHandler
     {
-        public void PrintLine(string message = "\n")
+        public void PrintLine(string i_Message = "\n")
         {
-            Console.WriteLine(message);
+            Console.WriteLine(i_Message);
         }
 
-        public void Print(string message = "\n")
+        public void Print(string i_Message = "\n")
         { 
-            Console.Write(message); 
+            Console.Write(i_Message); 
         }
         public string ReadLine()
         {
