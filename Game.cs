@@ -72,17 +72,30 @@ namespace Bullseye
                         break;
                     }
                     m_Handler.PrintLine($"Your guess is : {myGuess}");
-                    this.m_PreviousGuesses.Add(myGuess);
-                    List<char> list = this.GuessCurrentString(myGuess.ToCharArray());
-                    this.m_PreviousFeedbacks.Add(new string(list.ToArray()));
+                    StringBuilder GuessBuilder = new StringBuilder();
+                    foreach(char c in myGuess.ToCharArray())
+                    {
+                        GuessBuilder.Append(c);
+                        GuessBuilder.Append(' ');
+                    }
+                    m_Handler.PrintLine($"Modified guess : {GuessBuilder.ToString()}");
+                    this.m_PreviousGuesses.Add(GuessBuilder.ToString());
+                    List<char> Feedback = this.GuessCurrentString(myGuess.ToCharArray());
+                    StringBuilder FeedbackBuilder = new StringBuilder();
+                    foreach (char c in Feedback)
+                    {
+                        FeedbackBuilder.Append(c);
+                        FeedbackBuilder.Append(' ');
+                    }
+                    this.m_PreviousFeedbacks.Add(FeedbackBuilder.ToString());
                     m_Handler.Print($"Feedback for the guess {myGuess} // ");
-                    foreach (char c in list)
+                    foreach (char c in Feedback)
                     {
                         m_Handler.Print(c.ToString());
                     }
                     m_Handler.PrintLine();
                     PrintBoard();
-                    if (this.CheckIfBullseye(list))
+                    if (this.CheckIfBullseye(Feedback))
                     {
                         m_Handler.PrintLine("##Congratulations ! You correctly guessed the string !##");
                         IfGuessedCorrect = true;
@@ -93,20 +106,29 @@ namespace Bullseye
                 if (Quits)
                 {
                     m_Handler.PrintLine("~Goodbye !");
+                    break;
                 }
                 else if (!IfGuessedCorrect)
                 {
-                    m_Handler.PrintLine("Looks like you ran out of guesses, want to go again ? Y for yes or any other key for no :");
-                    string RetryInput = m_Handler.ReadLine();
-                    if (!RetryInput.Equals("Y"))
-                    {
-                        m_Handler.PrintLine("~Goodbye !");
-                        break;
-                    }
-
+                    m_Handler.PrintLine("No more guesses allowed. You lost.");
+                }
+                else
+                {
+                    m_Handler.PrintLine($"You guessed after {m_GuessNumber} steps!");
+                }
+                m_Handler.PrintLine("Would you like to start a new game ? <Y/N>");
+                string RetryInput = m_Handler.ReadLine();
+                while (!RetryInput.Equals("N") && !RetryInput.Equals("Y"))
+                {
+                    m_Handler.PrintLine("Invalid input. Please enter Y/N");
+                    RetryInput = m_Handler.ReadLine();
+                }
+                if (RetryInput.Equals("N"))
+                {
+                    m_Handler.PrintLine("~Goodbye !");
+                    break;
                 }
             }
-
         }
         public int getStringLength() { return m_StringLength; }
         public char[] GenerateString()
@@ -183,11 +205,11 @@ namespace Bullseye
 
             foreach (char c in i_StringInput)
             {
-                if (c < 'A' || c > 'H')
+                if (c < 'A' || c > 'H')//If the letter is not in range A-H
                 {
                     return false;
                 }
-                if (PreviousGuesses.Contains(c))
+                if (PreviousGuesses.Contains(c))//If a letter appears more than once
                 {
                     return false;
                 }
@@ -207,13 +229,14 @@ namespace Bullseye
 
         public void PrintBoard()
         {
+            Ex02.ConsoleUtils.Screen.Clear();
             m_Handler.PrintLine("| Pins:    | Result:  |");
             m_Handler.PrintLine("|=====================|");
             m_Handler.PrintLine("| # # # #  |          |");
             m_Handler.PrintLine("|=====================|");
             for(int j = 1 ; j <= m_GuessNumber ; j++)
             {
-                m_Handler.PrintLine($"| {m_PreviousGuesses.ElementAt(j-1)}     | {m_PreviousFeedbacks.ElementAt(j-1)}     |");
+                m_Handler.PrintLine($"| {m_PreviousGuesses.ElementAt(j-1)} | {m_PreviousFeedbacks.ElementAt(j-1)} |");
                 m_Handler.PrintLine("|=====================|");
             }
             for (int i = m_GuessNumber; i < m_MaxGuesses; i++) 
