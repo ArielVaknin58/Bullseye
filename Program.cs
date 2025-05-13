@@ -9,8 +9,8 @@ namespace Bullseye
     {
         static void Main(string[] args)
         {
-            Game game = new Game();
-            game.Run();
+            UI handler = new UI();
+            handler.Run();
         }
 
        
