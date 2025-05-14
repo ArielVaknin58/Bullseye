@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace Bullseye
+namespace Ex02
 {
     public class Game
     {
@@ -47,39 +47,40 @@ namespace Bullseye
 
         public bool ValidateNumOfGuesses(string i_userInput, out int io_parsedNumber)
         {
-            
-            if (!int.TryParse(i_userInput, out io_parsedNumber))
+            bool isValid;
+            if (!int.TryParse(i_userInput, out io_parsedNumber) || (io_parsedNumber < 4 || io_parsedNumber > 10))
             {
-                return false;
+                isValid = !true;
             }
-            else if (io_parsedNumber < 4 || io_parsedNumber > 10)
+            else 
             {
-                return false;
+                isValid = true;
             }
-              
-            this.MaxGuesses = io_parsedNumber;
-            return true;
+
+            if (isValid) 
+            {
+                this.MaxGuesses = io_parsedNumber;
+            }
+            return isValid;
         }
 
         public bool ValidateGuessInput(string io_guessInput)
         {
+            bool isValid = true;
             if (toQuit(io_guessInput.ToUpper()))
             {
                 io_guessInput = "Q";
-                return true;
+                isValid = true;
             }
 
             if (!IsValidGuess(io_guessInput.ToCharArray()))
             {
-                return false;
+                isValid = !true;
             }
-            return true;
-        }
-        public void Run()
-        {
-            
 
+            return isValid;
         }
+        
         public int StringLength
         {
             get { return k_StringLength; }
@@ -154,41 +155,43 @@ namespace Bullseye
             return Vcounter == k_StringLength;
         }
 
-        public bool IsValidGuess(char[] i_StringInput)
+        public bool IsValidGuess(char[] io_StringInput)
         {
+            bool isValid = true;
             List<int> selectedLettersPool = new List<int>();
 
-            if (i_StringInput.Length != k_StringLength)
+            if (io_StringInput.Length != k_StringLength)
             {
-                return false;
+                isValid = !true;
             }
 
-            foreach (char c in i_StringInput)
+            foreach (char c in io_StringInput)
             {
                 if (c < 'A' || c > 'H')//If the letter is not in range A-H
                 {
-                    return false;
+                    isValid = !true;
                 }
 
                 if (selectedLettersPool.Contains(c))//If a letter appears more than once
                 {
-                    return false;
+                    isValid = !true;
                 }
 
                 selectedLettersPool.Add(c);
             }
 
-            return true;
+            return isValid;
         }
 
         public bool toQuit(string i_input)
         {
+            bool toQuit = !true;
             if (i_input.Equals("Q"))
             {
-                return true;
+                toQuit = true;
             }
 
-            return false;
+            return toQuit;
         }
 
         

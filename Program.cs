@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace Bullseye
+namespace Ex02
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            UI handler = new UI();
-            handler.Run();
+            UI uiHandler = new UI();
+            uiHandler.Run();
         }
 
        

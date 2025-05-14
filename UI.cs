@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bullseye
+namespace Ex02
 {
     internal class UI
     {
@@ -27,7 +27,7 @@ namespace Bullseye
             while (true)
             {
                 Game game = new Game();
-                PrintLine("~~Hello ! Welcome to Bullseye.~~");
+                PrintLine("~~Hello ! Welcome to Ex02.~~");
 
                 PrintLine("Please choose the number of max guesses (4-10):");
                 string userInput = ReadLine();
@@ -41,8 +41,8 @@ namespace Bullseye
                 game.GenerateString();
                 
 
-                bool v_WasGuessedCorrectly = false;
-                bool v_UserQuits = false;
+                bool v_WasGuessedCorrectly = !true;
+                bool v_UserQuits = !true;
 
                 for (game.GuessNumber = 1; game.GuessNumber <= game.MaxGuesses; game.GuessNumber++)
                 {
