@@ -1,0 +1,9 @@
+C:\Users\Ariel\source\repos\Bullseye\bin\Debug\Bullseye.exe.config
+C:\Users\Ariel\source\repos\Bullseye\bin\Debug\Bullseye.exe
+C:\Users\Ariel\source\repos\Bullseye\bin\Debug\Bullseye.pdb
+C:\Users\Ariel\source\repos\Bullseye\bin\Debug\Ex02.ConsoleUtils.dll
+C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Ex02.csproj.AssemblyReference.cache
+C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Ex02.csproj.CoreCompileInputs.cache
+C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Ex02.csproj.Up2Date
+C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Bullseye.exe
+C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Bullseye.pdb

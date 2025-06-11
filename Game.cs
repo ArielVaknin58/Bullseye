@@ -9,12 +9,18 @@ namespace Ex02
     public class Game
     {
         private const int k_StringLength = 4;
-        private char[] m_CorrectGuess  = new char[k_StringLength];
-        private int m_MaxGuesses  = 10;
+        public const int k_NumberOfOptions = 8;
+        private char[] m_CorrectGuess = new char[k_StringLength];
+        private int m_MaxGuesses = 4;
         private int m_GuessNumber = 1;
         private List<string> m_PreviousGuesses = new List<string>();
         private List<string> m_PreviousFeedbacks = new List<string>();
 
+        public int NumberOfOptions
+        {
+            get { return k_NumberOfOptions; }
+
+        }
         public char[] CorrectGuess
         { 
             get { return m_CorrectGuess; }
@@ -24,7 +30,7 @@ namespace Ex02
         public int MaxGuesses
         {
             get { return m_MaxGuesses; }
-            private set { m_MaxGuesses = value; }
+            set { m_MaxGuesses = value; }
         }
 
         public int GuessNumber
