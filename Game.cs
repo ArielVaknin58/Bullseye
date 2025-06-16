@@ -4,105 +4,45 @@ using System.Linq;
 using System.Text;
 
 
-namespace Ex02
+namespace Ex05
 {
     public class Game
     {
+        public enum eFeedbackTypes
+        {
+            CorrectPosition,
+            WrongPosition,
+            NotPresent
+        }
+
         private const int k_StringLength = 4;
         public const int k_NumberOfOptions = 8;
-        private char[] m_CorrectGuess = new char[k_StringLength];
-        private int m_MaxGuesses = 4;
-        private int m_GuessNumber = 1;
-        private List<string> m_PreviousGuesses = new List<string>();
-        private List<string> m_PreviousFeedbacks = new List<string>();
-
-        public int NumberOfOptions
-        {
-            get { return k_NumberOfOptions; }
-
-        }
-        public char[] CorrectGuess
-        { 
-            get { return m_CorrectGuess; }
-            private set { m_CorrectGuess = value; }
-        }
-
-        public int MaxGuesses
-        {
-            get { return m_MaxGuesses; }
-            set { m_MaxGuesses = value; }
-        }
-
-        public int GuessNumber
-        {
-            get { return m_GuessNumber; }
-            set { m_GuessNumber = value; }
-        }
-
-        public List<string> PreviousGuesses
-        {
-            get { return m_PreviousGuesses; }
-            private set { m_PreviousGuesses = value; }
-        }
-
-        public List<string> PreviousFeedbacks
-        {
-            get { return m_PreviousFeedbacks; }
-            private set { m_PreviousGuesses = value; }
-        }
-
-        public bool ValidateNumOfGuesses(string i_userInput, out int io_parsedNumber)
-        {
-            bool isValid;
-            if (!int.TryParse(i_userInput, out io_parsedNumber) || (io_parsedNumber < 4 || io_parsedNumber > 10))
-            {
-                isValid = !true;
-            }
-            else 
-            {
-                isValid = true;
-            }
-
-            if (isValid) 
-            {
-                this.MaxGuesses = io_parsedNumber;
-            }
-            return isValid;
-        }
-
-        public bool ValidateGuessInput(string io_guessInput)
-        {
-            bool isValid = true;
-            if (toQuit(io_guessInput.ToUpper()))
-            {
-                io_guessInput = "Q";
-                isValid = true;
-            }
-
-            if (!IsValidGuess(io_guessInput.ToCharArray()))
-            {
-                isValid = !true;
-            }
-
-            return isValid;
-        }
-        
+        public char[] m_CorrectGuess { get; set; } = new char[k_StringLength];
+        public int m_MaxGuesses { get; set; } = 4;
+        public int m_GuessNumber { get; set; } = 1;       
+        private Random m_Random = new Random();
+      
         public int StringLength
         {
             get { return k_StringLength; }
         }
 
+        public int NumberOfOptions
+        {
+            get { return k_NumberOfOptions; }
+        }
+
+
         public char[] GenerateString()
         {
-            Random random = new Random();
             int[] selectedLettersPool = new int[k_StringLength];
 
             for (int i = 0; i < k_StringLength; i++)
             {
-                int randomizedLetterAscii = random.Next(8);
+                int randomizedLetterAscii = m_Random.Next(k_NumberOfOptions);
                 while (selectedLettersPool.Contains(randomizedLetterAscii))
                 {
-                    randomizedLetterAscii = random.Next(8);
+                    randomizedLetterAscii = m_Random.Next(k_NumberOfOptions);
                 }
 
                 selectedLettersPool[i] = randomizedLetterAscii;
@@ -112,47 +52,40 @@ namespace Ex02
             }
 
             return m_CorrectGuess;
-        }
+        }    
 
-        public List<char> EvaluateGuess(char[] i_guess)
+        public List<eFeedbackTypes> EvaluateGuess(char[] i_guess)
         {
-            List<char> result = new List<char>();
-            //Didn't use foreach loop because I compare elements in the same indices in the first condition
-            for(int i = 0 ; i < i_guess.Length; i++)
-            {   
+            List<eFeedbackTypes> result = new List<eFeedbackTypes>();
+
+            for (int i = 0; i < i_guess.Length; i++)
+            {
                 if (i_guess[i].Equals(m_CorrectGuess[i]))
                 {
-                    result.Add('V');
-                }             
-                else if(m_CorrectGuess.Contains(i_guess[i]))
+                    result.Add(eFeedbackTypes.CorrectPosition);
+                }
+                else if (m_CorrectGuess.Contains(i_guess[i]))
                 {
-                    result.Add('X');
+                    result.Add(eFeedbackTypes.WrongPosition);
                 }
                 else
                 {
-                    result.Add('Z');// Placeholder for the ' '. space has an ascii of 32 so it will be sorted to the front, but I need it in the back
+                    result.Add(eFeedbackTypes.NotPresent);
                 }
             }
 
-            result.Sort();// First V's, then X's and then 'Z's.
-
-            for(int j = 0; j < i_guess.Length; j++)
-            {
-                if (result[j].Equals('Z'))
-                {
-                    result[j] = ' ';//Place ' ' instead of the Z's in the end of the array
-                }
-            }
+            result.Sort();
 
             return result;
         }
 
-        public bool CheckIfBullseye(List<char> i_list)
+        public bool CheckIfBullseye(List<eFeedbackTypes> i_list)
         {
             int Vcounter = 0;
-            foreach (char c in i_list)
+
+            foreach (eFeedbackTypes feedbackItem in i_list)
             {
-                if (c.Equals('V'))
+                if (feedbackItem.Equals(eFeedbackTypes.CorrectPosition))
                 {
                     Vcounter++;
                 }
@@ -160,47 +93,6 @@ namespace Ex02
 
             return Vcounter == k_StringLength;
         }
-
-        public bool IsValidGuess(char[] io_StringInput)
-        {
-            bool isValid = true;
-            List<int> selectedLettersPool = new List<int>();
-
-            if (io_StringInput.Length != k_StringLength)
-            {
-                isValid = !true;
-            }
-
-            foreach (char c in io_StringInput)
-            {
-                if (c < 'A' || c > 'H')//If the letter is not in range A-H
-                {
-                    isValid = !true;
-                }
-
-                if (selectedLettersPool.Contains(c))//If a letter appears more than once
-                {
-                    isValid = !true;
-                }
-
-                selectedLettersPool.Add(c);
-            }
-
-            return isValid;
-        }
-
-        public bool toQuit(string i_input)
-        {
-            bool toQuit = !true;
-            if (i_input.Equals("Q"))
-            {
-                toQuit = true;
-            }
-
-            return toQuit;
-        }
-
-        
 
     }
 }

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Bullseye
+namespace Ex05
 {
     public partial class MainForm : Form
     {
@@ -19,22 +19,22 @@ namespace Bullseye
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object i_sender, EventArgs i_e)
         {
             this.button1.Text = $"Number of chances : {m_maxGuesses}";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ChancesIncreaserButton_Click(object i_sender, EventArgs i_e)
         {
             m_maxGuesses = m_maxGuesses == 10 ? 4 : m_maxGuesses + 1;
-            (sender as Button).Text = $"Number of chances : {m_maxGuesses}";
+            (i_sender as Button).Text = $"Number of chances : {m_maxGuesses}";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void StartButton_Click(object i_sender, EventArgs i_e)
         {
             this.Hide();
             GameForm gameForm = new GameForm();
-            gameForm.m_game.MaxGuesses = m_maxGuesses;
+            gameForm.m_Game.m_MaxGuesses = m_maxGuesses;
             gameForm.ShowDialog();          
         }
     }

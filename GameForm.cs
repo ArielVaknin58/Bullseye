@@ -1,5 +1,4 @@
-﻿using Ex02;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ex02
+namespace Ex05
 {
     public partial class GameForm : Form
     {
-        public Game m_game { get; private set; } = new Game();
-        private List<ArrowButton> m_ArrowButtonsList = new List<ArrowButton>();
-        public List<Button> m_FinalResultsButtons { get; private set; } = new List<Button>();
+        public Game m_Game { get; private set; } = new Game();
+        private readonly List<ArrowButton> r_ArrowButtonsList = new List<ArrowButton>();
+        private readonly List<Button> r_FinalResultsButtons  = new List<Button>();
         private const int k_ButtonSize = 50;
-        private const int k_spacing = 10;
-        private const int k_margin = 20;
+        private const int k_Spacing = 10;
+        private const int k_Margin = 20;
         
 
         public GameForm()
@@ -26,72 +25,76 @@ namespace Ex02
             InitializeComponent();
         }
 
-        private void GameForm_Load(object sender, EventArgs e)
+        private void GameForm_Load(object i_sender, EventArgs i_e)
         {
-            this.Height += (this.m_game.MaxGuesses - 3) * (k_spacing + k_ButtonSize);
-            System.Console.WriteLine(m_game.GenerateString());
-            for (int i = 0; i < m_game.StringLength; i++)
+            this.Height += (this.m_Game.m_MaxGuesses - 3) * (k_Spacing + k_ButtonSize);
+            m_Game.GenerateString();
+
+            for (int i = 0; i < m_Game.StringLength; i++)
             {
                 Button button = new Button();
                 button.Height = button.Width = k_ButtonSize;
                 button.BackColor = Color.Black;
-                button.Top = k_margin;
-                button.Left = k_margin + 10 * i + i * button.Width;
+                button.Top = k_Margin;
+                button.Left = k_Margin + 10 * i + i * k_ButtonSize;
                 button.Enabled = !true;
                 this.Controls.Add(button);
-                this.m_FinalResultsButtons.Add(button);
+                this.r_FinalResultsButtons.Add(button);
             }
 
-            printGridOfButtons(m_game.MaxGuesses, m_game.StringLength, k_spacing);
+            printGridOfButtons(m_Game.m_MaxGuesses, m_Game.StringLength, k_Spacing);
 
         }
 
-        private void ArrowButton_BullseyeAchieved(object sender, EventArgs e)
+        private void GameForm_BullseyeAchieved(object i_sender, EventArgs i_e)
         {
-            LettersAndColorsConverter converter = new LettersAndColorsConverter();
-            for (int k = 0; k < m_game.StringLength; k++)
+            for (int k = 0; k < m_Game.StringLength; k++)
             {
-                this.m_FinalResultsButtons[k].BackColor = converter.CharToColor(m_game.CorrectGuess[k]);
+                this.r_FinalResultsButtons[k].BackColor = new LettersAndColorsConverter().CharToColor(m_Game.m_CorrectGuess[k]);
             }
-            MessageBox.Show("You won the game!", "Victory");
         }
 
 
         private void printGridOfButtons(int i_rows = 4, int i_columns = 4, int i_spacing = 10)
         {
             ArrowButton previousArrowButton = null;
+
             for (int i = 0; i < i_rows; i++)
             {
                 Button lastButtonInRow = new Button();
-                ArrowButton arrowButton = new ArrowButton(this.m_game);
+                ArrowButton arrowButton = new ArrowButton(this.m_Game);
 
                 for (int j = 0; j < i_columns; j++)
                 {
-                    GuessButton guessButton = new GuessButton(this.m_game, k_margin, i_spacing);
-                    guessButton.Left = k_margin + j * (k_ButtonSize + i_spacing);
+                    GuessButton guessButton = new GuessButton(this.m_Game, k_Margin, i_spacing);
+
+                    guessButton.Left = k_Margin + j * (k_ButtonSize + i_spacing);
                     guessButton.Top = i_spacing + 30 + (i + 1) * k_ButtonSize + i_spacing * i;// Difference between GuessButtons and the ones underneath - 30px
                     this.Controls.Add(guessButton);
                     arrowButton.AddAssociatedButton(guessButton);
                     guessButton.Click += guessButton.GuessButton_Onclick;
                     guessButton.BackColorChanged += arrowButton.ArrowButton_NotifyBackColorChanged;
+
                     if(previousArrowButton != null)
                     {
-                        previousArrowButton.AddNextLineGuessButton(guessButton);
-                        guessButton.Enabled = !true;
+                        previousArrowButton.AddNextLineGuessButton(guessButton);      
                     }
+
+                    guessButton.Enabled = (previousArrowButton == null);
                     lastButtonInRow = guessButton;
                 }
 
                 arrowButton.Left = lastButtonInRow.Right + i_spacing;
                 arrowButton.Top = lastButtonInRow.Top + 10;
-                arrowButton.e_BoolPgiaAchieved += ArrowButton_BullseyeAchieved;
+                arrowButton.BullseyeAchieved += GameForm_BullseyeAchieved;
                 this.Controls.Add(arrowButton);
 
                 for (int k = 0; k < i_columns / 2; k++)
                 {
-                    for (int z = 0; z < i_columns - (i_columns / 2); z++) // The rest of the buttons - works in the case stringLength is odd.
+                    for (int z = 0; z < i_columns - (i_columns / 2); z++) // The rest of the buttons. It alsworks in the case stringLength is odd.
                     {
                         Button resultButton = new Button();
+
                         resultButton.Width = resultButton.Height = 20;
                         resultButton.Left = arrowButton.Right + 2 * i_spacing + (resultButton.Width + 10) * z;
                         resultButton.Top = 40 + (i + 1) * k_ButtonSize + i_spacing * i + 30 * k;

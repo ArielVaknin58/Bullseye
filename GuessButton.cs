@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ex02
+namespace Ex05
 {
     public class GuessButton : Button
     {
@@ -25,18 +25,20 @@ namespace Ex02
             this.m_game = i_game;
         }
 
-        public void GuessButton_Onclick(object sender, EventArgs e)
+        public void GuessButton_Onclick(object i_sender, EventArgs i_e)
         {
             Form colorSelectionForm = new Form();
             colorSelectionForm.Width = 320;
             colorSelectionForm.Height = 180;
             LettersAndColorsConverter converter = new LettersAndColorsConverter();
             char letter = 'A';
+
             for (int i = 0; i < m_game.NumberOfOptions / 4; i++)
             {
                 for (int j = 0; j < m_game.NumberOfOptions / 2; j++)
                 {
-                    ColorButton colorButton = new ColorButton((sender as Button), converter.CharToColor(letter));
+                    ColorButton colorButton = new ColorButton((i_sender as Button), converter.CharToColor(letter));
+
                     letter = (char)((int)letter + 1);
                     colorButton.Height = colorButton.Width = k_ButtonSize;
                     colorButton.Top = m_margin + i * (m_spacing + colorButton.Height);

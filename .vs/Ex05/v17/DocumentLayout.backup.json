@@ -1,0 +1,185 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|solutionrelative:mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex02.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\arrowbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex02.csproj|solutionrelative:arrowbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\colorbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|solutionrelative:colorbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|solutionrelative:game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex02.csproj|C:\\Users\\Ariel\\source\\repos\\Bullseye\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex02.csproj|solutionrelative:gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\guessbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|solutionrelative:guessbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|c:\\users\\ariel\\source\\repos\\bullseye\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B222F72D-C0D3-4F9B-8E79-6251DA7FDE21}|Ex05.csproj|solutionrelative:ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\MainForm.Designer.cs",
+              "RelativeDocumentMoniker": "MainForm.Designer.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\MainForm.Designer.cs",
+              "RelativeToolTip": "MainForm.Designer.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAcwD4AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:43:08.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ColorButton.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\ColorButton.cs",
+              "RelativeDocumentMoniker": "ColorButton.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\ColorButton.cs",
+              "RelativeToolTip": "ColorButton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:42:32.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Game.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\Game.cs",
+              "RelativeDocumentMoniker": "Game.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\Game.cs",
+              "RelativeToolTip": "Game.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAADwvyIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:41:59.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GuessButton.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\GuessButton.cs",
+              "RelativeDocumentMoniker": "GuessButton.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\GuessButton.cs",
+              "RelativeToolTip": "GuessButton.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:41:16.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\MainForm.cs",
+              "RelativeToolTip": "MainForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:16:35.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:16:24.31Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UI.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\UI.cs",
+              "RelativeDocumentMoniker": "UI.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\UI.cs",
+              "RelativeToolTip": "UI.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:13:29.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ArrowButton.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\ArrowButton.cs",
+              "RelativeDocumentMoniker": "ArrowButton.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\ArrowButton.cs",
+              "RelativeToolTip": "ArrowButton.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAADwvxEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T19:40:12.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GameForm.cs",
+              "DocumentMoniker": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\GameForm.cs",
+              "RelativeDocumentMoniker": "GameForm.cs",
+              "ToolTip": "C:\\Users\\Ariel\\source\\repos\\Bullseye\\GameForm.cs",
+              "RelativeToolTip": "GameForm.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAkwDAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T16:57:32.194Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

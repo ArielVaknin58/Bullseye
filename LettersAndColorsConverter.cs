@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex02
+namespace Ex05
 {
     public class LettersAndColorsConverter
     {
-        private readonly Dictionary<char, Color> m_charToColor = new Dictionary<char, Color>()
+        private readonly Dictionary<char, Color> r_CharToColor = new Dictionary<char, Color>()
         {
         { 'A', Color.Purple },
         { 'B', Color.Red },
@@ -21,7 +21,7 @@ namespace Ex02
         { 'H', Color.White }
         };
 
-        private readonly Dictionary<Color, char> m_colorToChar = new Dictionary<Color, char>()
+        private readonly Dictionary<Color, char> r_ColorToChar = new Dictionary<Color, char>()
         {
         { Color.Purple, 'A' },
         { Color.Red, 'B' },
@@ -35,20 +35,22 @@ namespace Ex02
         
         public char ColorToChar(Color i_color)
         {
-            if(!m_colorToChar.TryGetValue(i_color, out char result))
+            if(!r_ColorToChar.TryGetValue(i_color, out char result))
             {
-                result = 'Z';
+                result = ' ';
             }
+
             return result;
         }
 
         public Color CharToColor(char i_char)
         {
-            if (!m_charToColor.TryGetValue(i_char, out Color result))
+            if (!r_CharToColor.TryGetValue(i_char, out Color o_result))
             {
-                result = Color.Black;
+                o_result = Color.AliceBlue; // Some different color to indicate something went wrong
             }
-            return result;
+
+            return o_result;
         }
     }
 }

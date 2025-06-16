@@ -1,4 +1,4 @@
-﻿namespace Ex02
+﻿namespace Ex05
 {
     partial class GameForm
     {

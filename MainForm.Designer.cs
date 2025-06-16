@@ -1,4 +1,4 @@
-﻿namespace Bullseye
+﻿namespace Ex05
 {
     partial class MainForm
     {
@@ -39,7 +39,7 @@
             this.button1.Size = new System.Drawing.Size(523, 54);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.ChancesIncreaserButton_Click);
             // 
             // button2
             // 
@@ -49,7 +49,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "start";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // MainForm
             // 
@@ -60,7 +60,7 @@
             this.Controls.Add(this.button1);
             this.Name = "MainForm";
             this.Text = "MainForm";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }

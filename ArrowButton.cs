@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace Ex02
+namespace Ex05
 {
     public class ArrowButton : Button
     {
@@ -14,19 +14,13 @@ namespace Ex02
         private readonly List<Button> r_GuessesButtonsList = new List<Button>(); // The big 4 GuessButtons on the left of the arrowButton
         private readonly List<Button> r_FeedbackButtonsList = new List<Button>();  // The small 4 buttons on the right of the arrowButton 
         private readonly List<Button> r_NextLineGuessButtons = new List<Button>(); // The 4 GuessButtons of the next line, will become enabled when arrowButton will decide.
-        private int m_ColoredGuessButtons = 0;
-        private Game m_game;
-
-        public event EventHandler e_BoolPgiaAchieved;
-
-        public void OnBoolPgiaAchieved()
-        {
-            e_BoolPgiaAchieved.Invoke(this, EventArgs.Empty);
-        }
+        private Game m_Game;
+        public event EventHandler BullseyeAchieved;
+    
 
         public ArrowButton(Game i_game)
         {
-            m_game = i_game;
+            m_Game = i_game;
             this.Width = 50;
             this.Height = 30;
             this.Text = "--->";
@@ -47,14 +41,20 @@ namespace Ex02
         {
             r_NextLineGuessButtons.Add(i_button);
         }
-        private Color resultToColor(char i_charResult)
+        public void OnBullseyeAchieved()
+        {
+            BullseyeAchieved.Invoke(this, EventArgs.Empty);
+        }
+
+        private Color resultToColor(Game.eFeedbackTypes i_charResult)
         {
             Color resultColor = Button.DefaultBackColor;
-            if(i_charResult.Equals('X'))
+
+            if(i_charResult.Equals(Game.eFeedbackTypes.CorrectPosition))
             {
                 resultColor = Color.Black;
             }
-            else if(i_charResult.Equals('V'))
+            else if(i_charResult.Equals(Game.eFeedbackTypes.WrongPosition))
             {
                 resultColor = Color.Yellow;
             }
@@ -62,20 +62,22 @@ namespace Ex02
             return resultColor;
         }
 
-        public void ArrowButton_NotifyBackColorChanged(object sender, EventArgs e)
+        public void ArrowButton_NotifyBackColorChanged(object i_sender, EventArgs i_e)
         {
             bool ifAllInColor = true;
-            bool NoColorRepeated = true;
+            bool noColorRepeated = true;
             List<Color> colorsPool = new List<Color>();
+
             foreach (Button button in r_GuessesButtonsList)
             {
+
                 if (button.BackColor.Equals(Button.DefaultBackColor))
                 {
                     ifAllInColor = !true;
                 }
                 else if (colorsPool.Contains(button.BackColor))
                 {
-                    NoColorRepeated = !true;
+                    noColorRepeated = !true;
                 }
                 else
                 {
@@ -84,49 +86,45 @@ namespace Ex02
 
             }
            
-            this.Enabled = ifAllInColor && NoColorRepeated;
+            this.Enabled = ifAllInColor && noColorRepeated;
 
         }
 
-
-        public void ArrowButton_OnClick(object sender, EventArgs e)
+        public void ArrowButton_OnClick(object i_sender, EventArgs i_e) 
         {
             this.Enabled = !true;
-            char[] chars = new char[m_game.StringLength];
-            for(int i = 0 ; i < m_game.StringLength; i++ )
+            char[] charsFromColorsArray = new char[m_Game.StringLength];
+
+            for (int i = 0; i < m_Game.StringLength; i++)
             {
-                chars[i] = new LettersAndColorsConverter().ColorToChar(r_GuessesButtonsList[i].BackColor);
+                charsFromColorsArray[i] = new LettersAndColorsConverter().ColorToChar(r_GuessesButtonsList[i].BackColor);
             }
 
-            List<char> results = m_game.EvaluateGuess(chars);
+            List<Game.eFeedbackTypes> feedbackList = m_Game.EvaluateGuess(charsFromColorsArray);
 
-            for(int j = 0; j < m_game.StringLength; j++)
+            for (int j = 0; j < m_Game.StringLength; j++)
             {
-                r_FeedbackButtonsList[j].BackColor = resultToColor(results[j]);
-                r_FeedbackButtonsList[j].Text = results[j].ToString();
+                r_FeedbackButtonsList[j].BackColor = resultToColor(feedbackList[j]);
             }
 
-            
-            if(m_game.CheckIfBullseye(results.ToList()))
+            if (m_Game.CheckIfBullseye(feedbackList))
             {
-                OnBoolPgiaAchieved();               
+                OnBullseyeAchieved();
             }
             else
-            {
-                if(r_NextLineGuessButtons.Count == 0)
+            {       
+                foreach (Button nextLineGuessButton in r_NextLineGuessButtons)
                 {
-                    MessageBox.Show("You ran out of guesses ! better luck next time..", "Game Over");
-                }
-                foreach (Button guessButton in r_NextLineGuessButtons)
-                {
-                    guessButton.Enabled = true;
+                    nextLineGuessButton.Enabled = true;
                 }
             }
 
-            foreach (Button button in r_GuessesButtonsList)
+            foreach (Button guessButton in r_GuessesButtonsList)
             {
-                button.Enabled = !true;
+                guessButton.Enabled = !true;
             }
+
         }
+        
     }
 }
