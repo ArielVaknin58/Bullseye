@@ -7,3 +7,6 @@ C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Ex02.csproj.CoreCompileInputs.cac
 C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Ex02.csproj.Up2Date
 C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Bullseye.exe
 C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Bullseye.pdb
+C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Ex02.csproj.GenerateResource.cache
+C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Bullseye.MainForm.resources
+C:\Users\Ariel\source\repos\Bullseye\obj\Debug\Bullseye.GameForm.resources

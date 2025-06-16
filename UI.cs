@@ -13,8 +13,8 @@ namespace Ex02
     internal class UI
     {
         private Game m_game = new Game();
-        private Form MainForm = new Form();
-        private Form SecondForm = new Form();
+        //private Form MainForm = new Form();
+        //private Form SecondForm = new Form();
         private const int k_FormWidth = 410;
         private const int k_MainFormHeight = 600;
         private const int k_ButtonSize = 50;
@@ -41,42 +41,42 @@ namespace Ex02
 
         }
 
-        public void startButton_onClick(object sender,EventArgs e)
-        {
-            MainForm.Hide();
-            SecondForm.Width = k_FormWidth;
-            SecondForm.Height = k_MainFormHeight;
-            SecondForm.Text = "Game window";
-            m_game.GenerateString();
+        //public void startButton_onClick(object sender,EventArgs e)
+        //{
+        //    MainForm.Hide();
+        //    SecondForm.Width = k_FormWidth;
+        //    SecondForm.Height = k_MainFormHeight;
+        //    SecondForm.Text = "Game window";
+        //    m_game.GenerateString();
 
-            for (int i = 0; i < m_game.StringLength; i++)
-            {
-                Button button = new Button();
-                button.Height = button.Width = k_ButtonSize;
-                button.BackColor = Color.Black;
-                button.Top = k_margin;
-                button.Left = k_margin + 10*i + i*button.Width;
-                SecondForm.Controls.Add(button);
-            }
+        //    for (int i = 0; i < m_game.StringLength; i++)
+        //    {
+        //        Button button = new Button();
+        //        button.Height = button.Width = k_ButtonSize;
+        //        button.BackColor = Color.Black;
+        //        button.Top = k_margin;
+        //        button.Left = k_margin + 10*i + i*button.Width;
+        //        SecondForm.Controls.Add(button);
+        //    }
 
-            printGridOfButtons(m_game.MaxGuesses, m_game.StringLength, k_spacing);
+        //    printGridOfButtons(m_game.MaxGuesses, m_game.StringLength, k_spacing);
             
             
-            SecondForm.ShowDialog();
-        }
+        //    SecondForm.ShowDialog();
+        //}
 
         public void GuessButton_Onclick(object sender, EventArgs e)
         {
             Form colorSelectionForm = new Form();
             colorSelectionForm.Width = 320;
             colorSelectionForm.Height = 180;
-            LetterToColorConverter converter = new LetterToColorConverter();
+            LettersAndColorsConverter converter = new LettersAndColorsConverter();
             char letter = 'A';
             for (int i = 0; i < m_game.NumberOfOptions / 4 ; i++)
             {
                 for (int j = 0; j < m_game.NumberOfOptions / 2; j++ )
                 {
-                    ColorButton colorButton = new ColorButton((sender as Button), converter.ToColor(letter));
+                    ColorButton colorButton = new ColorButton((sender as Button), converter.CharToColor(letter));
                     letter = (char)((int)letter + 1);
                     colorButton.Height = colorButton.Width = k_ButtonSize;
                     colorButton.Top = k_margin +i*(k_spacing + colorButton.Height);
@@ -89,82 +89,85 @@ namespace Ex02
             colorSelectionForm.ShowDialog();
         }
 
-        private void arrowButton_OnClick(object sender, EventArgs e)
-        {
+        
+        //private void printGridOfButtons(int i_rows = 4 , int i_columns = 4 , int i_spacing = 10)
+        //{
+        //    for (int i = 0; i < i_rows; i++)
+        //    {
+        //        Button lastButtonInRow = new Button();
+        //        ArrowButton arrowButton = new ArrowButton();
 
-        }
-        private void printGridOfButtons(int i_rows = 4 , int i_columns = 4 , int i_spacing = 10)
-        {
-            for (int i = 0; i < i_rows; i++)
-            {
-                Button lastButtonInRow = new Button();
-                for (int j = 0; j < i_columns; j++)
-                {
-                    GuessButton guessButton = new GuessButton();
-                    guessButton.Left = k_margin + j * (k_ButtonSize + i_spacing);
-                    guessButton.Top = i_spacing + 30 + (i + 1) * k_ButtonSize + i_spacing * i;// Difference between GuessButtons and the ones underneath - 30px
-                    SecondForm.Controls.Add(guessButton);
-                    guessButton.Click += GuessButton_Onclick;
-                    lastButtonInRow = guessButton;
-                }
+        //        for (int j = 0; j < i_columns; j++)
+        //        {
+        //            GuessButton guessButton = new GuessButton();
+        //            guessButton.Left = k_margin + j * (k_ButtonSize + i_spacing);
+        //            guessButton.Top = i_spacing + 30 + (i + 1) * k_ButtonSize + i_spacing * i;// Difference between GuessButtons and the ones underneath - 30px
+        //            SecondForm.Controls.Add(guessButton);
+        //            arrowButton.AddAssociatedButton(guessButton);
+        //            guessButton.Click += GuessButton_Onclick;
+        //            lastButtonInRow = guessButton;
+        //        }
 
-                Button arrowButton = new Button();
-                arrowButton.Width = k_ButtonSize;
-                arrowButton.Height = 30;
-                arrowButton.Text = "--->";
-                arrowButton.Left = lastButtonInRow.Right + i_spacing;
-                arrowButton.Top = lastButtonInRow.Top + 10;
-                arrowButton.Enabled = !true;
-                arrowButton.Click += arrowButton_OnClick;
-                SecondForm.Controls.Add(arrowButton);
+        //        arrowButton.Width = k_ButtonSize;
+        //        arrowButton.Height = 30;
+        //        arrowButton.Text = "--->";
+        //        arrowButton.Left = lastButtonInRow.Right + i_spacing;
+        //        arrowButton.Top = lastButtonInRow.Top + 10;
+        //        arrowButton.Enabled = !true;
+        //        arrowButton.Click += arrowButton.ArrowButton_OnClick;
+        //        SecondForm.Controls.Add(arrowButton);
 
-                for(int k = 0;  k < i_columns / 2; k++)
-                {
-                    for(int z = 0; z < i_columns - (i_columns/2); z++) // The rest of the buttons - works in the case stringLength is odd.
-                    {
-                        Button resultButton = new Button();
-                        resultButton.Width = resultButton.Height = 20;
-                        //button2.Left = 2 * i_spacing + i_columns * (k_ButtonSize + i_spacing) + k_ButtonSize + 30*k;
-                        resultButton.Left = arrowButton.Right + 2*i_spacing + (resultButton.Width + 10) * k;                 
-                        resultButton.Top = 40 + (i + 1) * k_ButtonSize + i_spacing * i + 30*z;
-                        resultButton.Enabled = !true;
-                        SecondForm.Controls.Add(resultButton);
-                    }          
-                }         
-            }
-        }
+        //        for(int k = 0;  k < i_columns / 2; k++)
+        //        {
+        //            for(int z = 0; z < i_columns - (i_columns/2); z++) // The rest of the buttons - works in the case stringLength is odd.
+        //            {
+        //                Button resultButton = new Button();
+        //                resultButton.Width = resultButton.Height = 20;
+        //                //button2.Left = 2 * i_spacing + i_columns * (k_ButtonSize + i_spacing) + k_ButtonSize + 30*k;
+        //                resultButton.Left = arrowButton.Right + 2*i_spacing + (resultButton.Width + 10) * k;                 
+        //                resultButton.Top = 40 + (i + 1) * k_ButtonSize + i_spacing * i + 30*z;
+        //                resultButton.Enabled = !true;
+        //                SecondForm.Controls.Add(resultButton);
+        //            }          
+        //        }         
+        //    }
+        //}
 
         private void GuessButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         public void Run()
         {
-            MainForm.Width = k_FormWidth;
-            MainForm.Height = 150;
-            MainForm.Text = "Bool Pgia";
 
-            Button chancesButton = new Button();
-            //chancesButton.Left = 20;
-            //chancesButton.Top = 20;
-            chancesButton.Location = new Point(20, 20);
-            chancesButton.Height = 30;
-            chancesButton.Width = 240;
-            chancesButton.Text = $"Number of chances : {m_game.MaxGuesses}";
-            chancesButton.Click += chanceButton_OnClick;
-            MainForm.Controls.Add(chancesButton);
+            MainForm form = new MainForm();
+            form.ShowDialog();
 
-            Button startButton = new Button();
-            //startButton.Left = 180;
-            //startButton.Top = 70;
-            startButton.Location = new Point(180, 70);
-            startButton.Width = 80;
-            startButton.Height = 30;
-            startButton.Text = "Start";
-            startButton.Click += startButton_onClick;
-            MainForm.Controls.Add(startButton);
-            MainForm.ShowDialog();
+
+            //MainForm.Width = k_FormWidth;
+            //MainForm.Height = 150;
+            //MainForm.Text = "Bool Pgia";
+
+            //Button chancesButton = new Button();
+            ////chancesButton.Left = 20;
+            ////chancesButton.Top = 20;
+            //chancesButton.Location = new Point(20, 20);
+            //chancesButton.Height = 30;
+            //chancesButton.Width = 240;
+            //chancesButton.Text = $"Number of chances : {m_game.MaxGuesses}";
+            //chancesButton.Click += chanceButton_OnClick;
+            //MainForm.Controls.Add(chancesButton);
+
+            //Button startButton = new Button();
+            ////startButton.Left = 180;
+            ////startButton.Top = 70;
+            //startButton.Location = new Point(180, 70);
+            //startButton.Width = 80;
+            //startButton.Height = 30;
+            //startButton.Text = "Start";
+            //startButton.Click += startButton_onClick;
+            //MainForm.Controls.Add(startButton);
+            //MainForm.ShowDialog();
 
             //while (true)
             //{
